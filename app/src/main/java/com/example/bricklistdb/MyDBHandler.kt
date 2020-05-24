@@ -201,28 +201,7 @@ class MyDBHandler(context: Context) : SQLiteOpenHelper(context,
         mDatabase?.execSQL(query)
     }
 
-    fun getSettings() : AppSettings {
-        val query = "SELECT * FROM Settings"
-        val cursor = mDatabase?.rawQuery(query, null)
-        cursor?.moveToFirst()
-        var bool : Boolean
-        System.out.println(cursor!!.getInt(2))
-        bool = cursor!!.getInt(2) == 1
-        val settings = AppSettings(cursor!!.getString(1), bool)
-        cursor.close()
-        return settings
-    }
-
-    fun updateSettings(url: String, showArchived: Int) {
-        System.out.println(showArchived)
-        val query = "UPDATE Settings SET prefix = $url, archive = $showArchived"
-        mDatabase?.execSQL(query)
-        val query2 = "Select * FROM SETTINGS"
-        val cursorrr = mDatabase?.rawQuery(query2, null)
-        cursorrr?.moveToFirst()
-        System.out.println(cursorrr?.getInt(0))
-    }
-
+ 
     override fun onCreate(db: SQLiteDatabase?) { }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) { }
